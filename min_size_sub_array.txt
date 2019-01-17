@@ -1,0 +1,27 @@
+# Time complexity: single iteration of the list, each element can be
+# visited by at most twice (left pointer and i). O(n)
+# Space complexity: O(1) extra space. 
+class Solution:
+    def minSubArrayLen(self, s, nums):
+        """
+        :type s: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        answer = len(nums) + 1
+        subSum = 0
+        left = 0
+        for i in range(len(nums)):
+            subSum = subSum + nums[i]
+            while subSum >= s:
+                answer = min(i+1-left, answer);
+                subSum = subSum - nums[left]
+                left = left + 1
+        
+            
+        if answer == len(nums) + 1:
+            answer = 0
+            
+        return answer
+            
+        

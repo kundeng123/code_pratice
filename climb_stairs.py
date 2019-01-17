@@ -1,4 +1,6 @@
 #for two steps problem, dp[i] = dp[i-1] + dp[i-2]
+#time complexity: single loop up to n, O(n)
+#space complexity: dp array size of n. O(n)
 class Solution:
     def climbStairs(self, n):
         """

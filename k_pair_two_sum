@@ -1,0 +1,31 @@
+def solution(k,nums):
+
+    result = 0
+    m = {}
+    
+    #complexity = O(n)
+    for i in nums:
+        if i in m:
+            m[i] += 1
+        else:
+            m.update({i: 1})
+
+    count_twice = 0
+    #for i in range(len(nums)):
+
+    print(m)
+
+    O(n)
+    for i in nums:
+        target = k - i
+        if target in m:
+            result += m.get(target)
+        if i == target :
+            result -= 1
+
+    return result/2
+
+
+nums = [1,3,1,2,1,8]
+
+print(solution(5,nums)) // O(n) ?

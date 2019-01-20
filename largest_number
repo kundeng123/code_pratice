@@ -1,0 +1,23 @@
+class Solution(object):
+    def largestNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: str
+        """
+        #using custom comparator python method, python 3 doesn't work!!
+        #complexity: using sort, O(nlogn)
+        def cmp_func(x, y):
+            """Sorted by value of concatenated string increasingly."""
+            if x + y > y + x:
+                return -1
+            elif x == y:
+                return 0
+            else:
+                return 1
+            
+        sortedNum = sorted([str(x) for x in nums], cmp =cmp_func )
+        if sortedNum[0] == '0':
+            return '0'
+        else:
+            return ''.join(sortedNum)
+

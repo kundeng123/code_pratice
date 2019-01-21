@@ -30,3 +30,4 @@ class Solution:
             return False
                 
             
+#if include special char and space, need []*256 

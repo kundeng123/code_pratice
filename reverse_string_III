@@ -1,0 +1,15 @@
+class Solution:
+    def reverseWords(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        #print(s.split(' '))
+        #time complexity: O(n)
+        result = ""
+        for chars in s.split(' '):
+            #print(chars)
+            result += chars[::-1] +" "
+            
+        #print(result)
+        return result.rstrip()

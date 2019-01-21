@@ -1,0 +1,25 @@
+def solution(nums):
+    # time complexity is O(N) loop nums once
+    if len(nums) == 1:
+        return nums
+    else:
+        smallest = float('inf')
+        secondSmallest = float('inf')
+
+        #4,3,2,1
+
+        for i in range(len(nums)):
+            if nums[i] < smallest:
+                secondSmallest = smallest
+                smallest = nums[i]
+            elif nums[i] > smallest and nums[i] < secondSmallest:
+                secondSmallest = nums[i]
+
+
+        if(secondSmallest == float('inf')):
+            return 0
+
+        return secondSmallest
+
+nums = [2, 2, 5, 7, 3, 3, 1, 1]
+print(solution(nums))

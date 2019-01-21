@@ -1,0 +1,48 @@
+class Solution:
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        str = str.strip()
+        result = 0
+        if not str:
+            return 0
+        
+    
+        negative = False
+        if ord(str[0]) not in range(ord('0'), ord('9')+1) and (str[0] != '-' and str[0] != '+'):
+            return 0
+        else:
+            
+            i = 0
+            
+            if str[0] == '-':
+                i = i+1
+                negative = True
+            
+            if str[0] == '+':
+                nagetive = False
+                i = i+1
+
+            for i in range(i,len(str)):
+                
+                if ord(str[i]) in range(ord('0'), ord('9')+1):
+                    result = 10*result + int(str[i])
+                else:
+                    break
+        
+            if negative:
+                if -result < -2147483648:
+                    return -2147483648
+                else:
+                    return -result
+            else:
+                if result > 2147483647:
+                    return 2147483647 
+                else:
+                    return result
+
+
+                    
+                    

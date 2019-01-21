@@ -1,0 +1,19 @@
+class Solution:
+    def firstUniqChar(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        #time complexity is O(N), loop through the string twice
+        #space complexity is O(N)
+        arrayS = list(s)
+        countS = [0] * 26
+        for i in range(len(arrayS)):
+            countS[ord(arrayS[i]) - ord('a')] = countS[ord(arrayS[i]) - ord('a')] + 1
+        #print(countS)
+        
+        for i in range(len(arrayS)):
+            if countS[ord(arrayS[i]) - ord('a')] == 1:
+                return i
+            
+        return -1

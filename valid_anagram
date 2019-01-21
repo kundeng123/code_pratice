@@ -1,0 +1,32 @@
+class Solution:
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        #Time complexity is O(n) because accessing counter table is constant time operation
+        #spcae is O(1)
+        
+        countS = [0]*26
+        countT = [0] * 26
+        if len(s) != len(t):
+                return False
+        
+        else:
+            arrayS = list(s)
+            arrayT = list(t)
+            #print(arrayS)
+            
+            for i in range(len(arrayS)):
+                countS[ord(arrayS[i]) - ord('a')] = countS[ord(arrayS[i]) - ord('a')] + 1
+                countT[ord(arrayT[i]) - ord('a')] = countT[ord(arrayT[i]) - ord('a')] + 1
+        #print(countS)
+        #print(countT)
+        
+        if countS == countT:
+            return True
+        else:
+            return False
+                
+            

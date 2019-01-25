@@ -1,0 +1,43 @@
+class Solution:
+    def accountsMerge(self, accounts):
+        """
+        :type accounts: List[List[str]]
+        :rtype: List[List[str]]
+        """
+        
+        # time complexity: if n is the length of account[i], build graph and search each node need O(sum(n)). Sort needs O(nlogn)
+        # so total time complexity is O(sum(nlongn))
+        # space complexity is O(sum(n))
+        em_to_name = {}
+        graph = collections.defaultdict(set)
+        
+        for acc in accounts:
+            name = acc[0]
+            for email in acc[1:]:
+                graph[acc[1]].add(email)
+                graph[email].add(acc[1])
+                em_to_name[email] = name
+        #print(graph)
+        #print(maps)
+        #print(em_to_name)
+        
+        result = []
+        visited = []
+        
+        for email in graph:
+            if email not in visited:
+                visited.append(email)
+                stack = [email]
+                emailList = []
+                
+                while stack:
+                    node = stack.pop()
+                    emailList.append(node)
+                    for neighbors in graph[node]:
+                        if neighbors not in visited:
+                            visited.append(neighbors)
+                            stack.append(neighbors)
+                result.append([em_to_name[email]] + sorted(emailList))
+                    
+        return result
+                    

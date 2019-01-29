@@ -1,0 +1,21 @@
+class Solution:
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # either rob house i + sum(i - 2 ) or don't rob houst i + sum(i-1)
+        # time complexity is O(n)? space is O(n), can be improved to O(1): have pre1 and pre2 to store money
+        if not nums:
+            return 0
+        if len(nums) < 2:
+            return nums[0]
+        
+        money = [0] * (len(nums) + 1)
+        money[0] = nums[0]
+        money[1] = max(nums[1], nums[0])
+        
+        for i in range( 1, len(nums)-1):
+            money[i+1] = max(money[i-1] + nums[i+1], money[i])
+        
+        return (money[len(nums)-1])

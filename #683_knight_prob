@@ -1,0 +1,69 @@
+class Solution:
+    def knightProbability(self, N, K, r, c):
+        """
+        :type N: int
+        :type K: int
+        :type r: int
+        :type c: int
+        :rtype: float
+        """
+        #using sum of probability method.
+        # for each move, count how many points left on the board. and / 8 ** k
+        
+        
+        moves = [(-2,-1),(-1,-2),(1,-2),(2,-1),
+                 (-2,1),(-1,2),(1,2),(2,1)]
+       
+        dp = [[0] * N for  _ in range(N)]
+        
+        dp[r][c] = 1
+        
+        #print(dp)
+        
+        for steps in range(K):
+            dp2 = [[0] * N for  _ in range(N)]
+            #print(dp)
+            for i in range(len(dp)):
+                for j in range(len(dp[0])):
+                    
+                    if dp[i][j] >= 1:
+                        #print("i and j ", i,j)
+                        for dr,dc in moves:
+                            if 0 <= i+dr < N and 0<= j+dc <N:
+                                #print("r+dr ", i+dr)
+                                #print("c+dc ", j+dc)
+                                dp2[i+dr][j+dc] +=dp[i][j]
+            dp = dp2
+         
+        #print("final dp ", dp)
+        #print(sum([sum(i) for i in dp]))
+        #print(8 ** N)
+        
+        print( 8 ** K)
+        return (sum([sum(i) for i in dp])) / (8 ** K)
+        
+        
+        #below is solution from the leetcode
+        '''
+        dp = [[0] * N for  _ in range(N)]
+        dp[r][c] = 1 #prob of current move on the board is 1
+        print(dp)
+        for steps in range(K):
+            dp2 = [[0] * N for  _ in range(N) ]
+            for r, row in enumerate(dp):
+                #print("---------------------------")
+                #print("r " ,r)
+                #print("row ", row)
+                for c, val in enumerate(row):
+                    #print("c ", c)
+                    #print("val ", val)
+                    for dr, dc in moves:
+                        #print("r ", r)
+                        #print("c", c)
+                        
+                        if 0 <= r+dr < N and 0<= c+dc <N:
+                            
+                            dp2[r+dr][c+dc] += val/8
+                dp = dp2
+                #print(dp)
+        '''

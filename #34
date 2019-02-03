@@ -1,0 +1,52 @@
+class Solution:
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        using binary search. Time complexity: O(2 * logN) = O(logN)
+        """
+        if not nums:
+            return [-1,-1]
+        elif nums[0] > target or nums[len(nums)-1] < target:
+            return [-1,-1]
+        #find the left most index of the target
+        low = 0
+        high = len(nums) 
+        leftMost = -1
+        rightMost = -1
+        
+        while low < high:
+            mid = (high + low) // 2
+            if nums[mid] >=target :
+                
+                high = mid
+            else:
+                low = mid + 1
+        if low != 0 or nums[low] == target:
+            leftMost = low        
+        #rint("left ", low)
+        
+        high = len(nums)
+        low = 0
+        
+        
+        while low < high:
+            
+            mid = (high + low) // 2
+            
+            if nums[mid] <= target:
+                low = mid + 1
+            else:
+                high = mid
+        
+        if low != 0 or nums[low] == target:
+            rightMost = low
+        
+        
+        if nums[leftMost] == target and nums[rightMost-1] == target:
+            return [leftMost, rightMost - 1]
+        else:
+            return [-1,-1]
+        
+        

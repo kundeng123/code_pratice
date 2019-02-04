@@ -1,0 +1,49 @@
+
+class Solution:
+    def fractionAddition(self, expression):
+    
+        #gcd complexity: O(log(a, b)). in total o(n * logx), where n = number in fraction, x is the maximun possible value of denominator
+        def gcd(a, b):
+            
+            while b != 0:
+                t= b
+                b = a % b
+                a = t
+            return a
+         
+        def lcm(a,b):
+            return a * b / gcd(a,b)
+        part = ''
+        fractions = []
+        for c in expression:
+            if c in '+-':
+                if part: 
+                    fractions.append(part)
+                part = ''
+            part += c
+        if part: 
+            fractions.append(part)
+               
+        print(fractions)
+        
+        numerator = []
+        denominator = []
+        for value in fractions:
+            numerator.append(int(value.split('/')[0]))
+            denominator.append(int(value.split('/')[1]))
+        sum_of_nums = 0
+        
+        lcm_val = 1
+        for i in range(len(denominator)):
+    
+            lcm_val = lcm(lcm_val, denominator[i])
+        
+        for j in range(len(numerator)):
+            sum_of_nums += numerator[j] * lcm_val / denominator[j]
+
+        #print(sum_of_nums)
+        gcd_val = abs(gcd(sum_of_nums, lcm_val))
+        
+        return str(int(sum_of_nums/gcd_val)) + "/" + str(int(lcm_val/gcd_val))
+    
+    

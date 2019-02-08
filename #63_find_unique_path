@@ -1,0 +1,42 @@
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: 'List[List[int]]') -> 'int':
+        #a cell can only be reached from left or top
+        #use dynamic programming
+        
+        if obstacleGrid[0][0] == 1:
+            return 0
+        
+        rowNum = len(obstacleGrid)
+        colNum = len(obstacleGrid[0])
+        
+        #could enhace this. make changes on obstacleGrid itself, space compelxity would be O(1)
+        dp = [ [0] * colNum  for i in range(rowNum)]
+        
+        
+        dp[0][0] = 1
+        for i in range(colNum):
+            #pharse 1, didn't consider 1 condition. ie, if [0][2] is 1, [0][x>2] is not reachable
+            #pharse 2, consider above case
+            if obstacleGrid[0][i] != 1:
+                dp[0][i] = 1
+            else:
+                break
+        
+        for j in range(1, rowNum) :
+           
+            if obstacleGrid[j][0] != 1:
+                dp[j][0] = 1
+            else:
+                break
+        
+        for row in range(1,rowNum):
+            for col in range(1, colNum):
+                #print("row column ", row, col)
+                if obstacleGrid[row][col] != 1:
+                    dp[row][col] = dp[row-1][col] + dp[row][col-1]
+                else:
+                    dp[row][col] = 0
+        
+        #print(dp)
+        
+        return dp[rowNum-1][colNum-1]

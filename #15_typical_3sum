@@ -1,0 +1,40 @@
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        result = []
+        for i in range(len(nums)-2):
+            
+            # skip same element
+            if i>0 and nums[i] == nums[i-1]:
+                continue
+            target = 0 - nums[i]
+            #print("nums ",nums[i])
+            left = i+1
+            right = len(nums) - 1
+            #do 2sum sorted
+            while left < right :
+                twoSum = nums[left] + nums[right]
+
+                if twoSum == target:
+                    result.append([nums[i], nums[left], nums[right]])
+                    # move left and right to next different element
+                    while left < right and nums[left+1] == nums[left]:
+                        left = left +1
+                    while left < right and nums[right-1] == nums[right]:
+                        right = right -1
+                    
+                    left = left + 1
+                    right = right - 1
+                else:
+                    if twoSum < target:
+                        left = left + 1
+                    else:
+                        right =  right -1
+                        
+            
+        return result
+                

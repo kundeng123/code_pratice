@@ -23,3 +23,7 @@ def solution(nums):
 
 nums = [2, 2, 5, 7, 3, 3, 1, 1]
 print(solution(nums))
+
+# for kth smallest, sort the list first:
+# nums.sort() will take O(n log n) 
+# return nums[k-1]

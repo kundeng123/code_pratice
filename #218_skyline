@@ -1,0 +1,41 @@
+from heapq import heappush, heappop
+class Solution:
+    def getSkyline(self, buildings):
+        """
+        :type buildings: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        #first get all x positions for building
+        
+        position = set([buildings[i][0] for i in range(len(buildings))] + [buildings[j][1] for j in range(len(buildings))])
+        result = [[-1,-1]]
+        
+        #currentBuilding will save (height, right-of-building)
+        currentBuildings = []
+        index = 0
+        
+        for pos in sorted(position):
+            #check if index building should be added to currentBuilding list
+            while index < len(buildings) and buildings[index][0] <= pos :
+                heappush(currentBuildings, (-buildings[index][2], buildings[index][1]))
+                index += 1
+            
+            while currentBuildings and currentBuildings[0][1] <= pos:
+                heappop(currentBuildings)
+                #print("current pos ", pos)
+
+
+            
+            if currentBuildings:
+                
+                h = -currentBuildings[0][0]
+            else:
+                h = 0
+            
+            #add height to result if it's not added in the previous run, which is last element of current result
+            if result and result[-1][1] != h:
+                result.append([pos, h])
+            
+            #print(result)
+        
+        return result[1:]

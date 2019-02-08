@@ -1,0 +1,33 @@
+class Solution:
+    def findMin(self, nums: 'List[int]') -> 'int':
+        
+        #time complexity is o(logn) binary search
+        if not nums:
+            return 0
+        
+        if len(nums) == 1:
+            return nums[0]
+        
+        
+        left = 0
+        right = len(nums) -1 
+        if nums[right] > nums[left]:
+            return nums[left]
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            #print(nums[mid])
+            if nums[mid] > nums[mid + 1]:
+                return nums[mid+1]
+            if nums[mid-1] > nums[mid]:
+                return nums[mid]
+            
+            if nums[left] < nums[mid]:
+                # from left to mid is ascending
+                left = mid + 1
+            else:
+                # some how left to mid is not in corrent order
+                right = mid - 1
+            
+                
+        

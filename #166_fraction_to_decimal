@@ -1,0 +1,43 @@
+class Solution:
+    def fractionToDecimal(self, numerator: 'int', denominator: 'int') -> 'str':
+        if numerator == 0: 
+            return '0'
+        
+        negative = False
+        
+        #check if the decimal should be negative
+        if numerator * denominator < 0:
+            negative = True
+       
+        # divmod(a,b) --> (a//b, a % b)
+        # w would be the number in decimal before '.'
+        w,r = divmod(abs(numerator),abs(denominator))
+        s = str(w)
+        
+        #print("s ", s)
+        #print("r ", r)
+        if negative:
+            s = "-" + s 
+        if r:
+            s += '.'
+            
+        i = len(s)
+        
+        #the first remainder locates at index i
+        
+        nums = { r: i }
+        #print("nums ", nums)
+        
+        #mimic the caculation using a pen 
+        while r:
+            q,r = divmod(r * 10, abs(denominator))
+            s += str(q)
+            if r in nums:
+                print("s[:nums[r]] ", s[:nums[r]])
+                print("s[nums[r]:] ", s[nums[r]:])
+                s = s[:nums[r]] + '(' + s[nums[r]:] + ')' 
+                return s
+            i += 1
+            nums[r] = i
+        return s
+        

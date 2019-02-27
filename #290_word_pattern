@@ -1,0 +1,11 @@
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        tempSet = set(zip(pattern,str.split(" ")))
+        #print(len(tempSet))
+        
+        patternSet = set(pattern)
+        #print(len(patternSet))
+        strSet = set(str.split(" "))
+        #print(len(strSet))
+        return len(patternSet) == len(strSet) and len(patternSet) == len(tempSet) \
+                and len(pattern) == len(str.split(" "))

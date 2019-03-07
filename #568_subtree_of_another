@@ -1,0 +1,27 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    #time complexity: O(m * n) ?? A total of n nodes of the tree s and m nodes of tree t 
+    #space complexity: O(n)
+    
+    def isSame(self, node1: TreeNode, node2: TreeNode) -> bool:
+        #time complexity: O(m * n) ?? A total of n nodes of the tree s and m nodes of tree t 
+        #space complexity: O(n)
+        if (not node1) and (not node2):
+            return True
+        if (not node1) or (not node2):
+            return False
+        
+        #print("node1 ", node1.val)
+        #print("node2 ", node2.val)
+        return node1.val== node2.val and self.isSame(node1.left, node2.left) and self.isSame(node1.right, node2.right)
+    
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        if not s:
+            return False
+        return (self.isSame(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t))

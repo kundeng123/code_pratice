@@ -1,0 +1,51 @@
+class Solution:
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        
+        #strategy: search first row, get the first col c < target
+        #search along col c, get the first row r < target
+        #search from [r,c] row from right to left
+        #if elemet < target, move done to row+1
+        #repeat. Time complexity: O(M + N)?
+        
+        if not matrix:
+            return False
+        
+        rowMax = len(matrix)
+        colMax = len(matrix[0])
+        
+        currRow = 0
+        currCol = 0
+        loop = 5
+        for i in range(colMax-1):
+            if matrix[0][i] == target or matrix[0][i+1] == target:
+                return True
+            elif matrix[0][i]< target and matrix[0][i+1] > target:
+                currCol = i
+            elif matrix[0][i+1] < target:
+                currCol = i+1
+            
+        for i in range(rowMax-1):
+            if matrix[i][currCol] == target or  matrix[i+1][currCol] == target:
+                return True
+            elif matrix[i][currCol]< target and matrix[i+1][currCol] > target:
+                currRow = i+1
+            elif matrix[i+1][currCol] < target:
+                currRow = i+1
+        
+        
+        
+        while currRow >=0 and currRow < rowMax and currCol >= 0 and currCol < colMax:
+            if matrix[currRow][currCol] == target:
+                return True
+            elif matrix[currRow][currCol] > target:
+                currCol = currCol - 1
+            elif matrix[currRow][currCol] < target:
+                currRow = currRow + 1
+            #print("currRow ", currRow)
+            #print("currCol ", currCol)
+        return False

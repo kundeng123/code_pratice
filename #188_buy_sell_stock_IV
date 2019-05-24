@@ -1,0 +1,31 @@
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        
+        #intialize dp dp[i][j], max profit on day j with at most i transaction 
+        # time compexity O(len(prices) * k) ???
+        
+        
+        if not prices:
+            return 0
+        
+        #if k > len(prices)/2, then we can do maximun transactions, refer to method 122
+        if k > len(prices)/2:
+            result = 0
+            for i in range(1, len(prices)):
+                if prices[i] > prices[i-1]:
+                    result += prices[i] - prices[i-1]
+            return result
+            
+            
+            
+        dp = [[0] * (len(prices)) for i in range(k+1) ]
+        #print(dp)
+        
+        for i in range(1,k+1):
+            localMax = -prices[0]
+            for j in range(1,len(prices)):
+                dp[i][j] = max(dp[i][j-1], prices[j] + localMax)
+                localMax = max(localMax, dp[i-1][j-1] - prices[j])
+            #print(dp)
+        
+        return dp[k][len(prices)-1]

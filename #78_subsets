@@ -1,0 +1,13 @@
+class Solution:
+    # using DFS recursive. Need to review
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.dfs(nums,0,[],result)
+        return result
+    
+    def dfs(self, nums, index, path, res):
+        #print("path ", path)
+        res.append(path)
+        for i in range(index,len(nums)):
+            
+            self.dfs(nums, i+1, path+[nums[i]],res)

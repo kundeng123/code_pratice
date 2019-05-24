@@ -1,0 +1,77 @@
+class Node:
+    #initialize node class for double linkedly list and dict
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.next = None
+        self.prev = None
+
+class LRUCache:
+    #using node to inialize a double linked list
+    def __init__(self, capacity: 'int'):
+        self.capacity = capacity
+        # dict  key is key, value is the Node!!
+        self.dic = dict()
+        self.head = Node(0,0)
+        
+        self.tail = Node(0,0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def _remove(self, node):
+        prevNode = node.prev
+        nextNode = node.next
+        prevNode.next = nextNode
+        nextNode.prev = prevNode
+    
+    #when adding a new node, always add to the tail and delete tail
+    def _insert(self, node):
+        temp = self.tail.prev
+        temp.next = node
+        self.tail.prev = node
+        node.prev = temp
+        node.next = self.tail
+            
+    
+    def printList(self):
+        node = self.head
+        count = 10
+        while node and count > 0:
+            print("key ", node.key)
+            print("val ", node.val)
+            node = node.next
+            count = count -1
+        
+    #if key in dict, move it to head, if not return -1    
+    def get(self, key: 'int') -> 'int':
+        #print("--------------------")
+        #self.printList()
+        if key in self.dic:
+            node = self.dic[key]
+            self._remove(node)
+            self._insert(node)
+            return node.val
+        
+        return -1
+   
+    #if key in dict, remove the old node with key, insert it again
+    #if key not in dict, insert it , check capacity, remove the head if full
+    def put(self, key: 'int', value: 'int') -> 'None':
+        if key in self.dic:
+            self._remove(self.dic[key])
+        node = Node(key,value)
+        self._insert(node)
+        self.dic[key] = node
+        if len(self.dic) > self.capacity:
+            temp = self.head.next
+            self._remove(temp)
+            del self.dic[temp.key]
+        
+        #print("---------------")
+        #self.printList()
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)

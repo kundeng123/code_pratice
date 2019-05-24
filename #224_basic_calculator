@@ -1,0 +1,51 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        currResult = 0
+        currNumber = 0
+        stack = []
+        sign = 1
+        
+        if not s:
+            return null
+    
+        print(s)
+        
+        for c in s:
+            if c.isdigit():
+                currNumber = currNumber * 10 + int(c)
+            elif c == '+':
+                currResult += sign * currNumber
+                currNumber = 0
+                sign = 1
+            elif c == '-':
+                currResult += sign * currNumber
+                currNumber = 0
+                sign = -1
+            elif c == '(':
+                # number sign (
+                #add currResult to stack, then sign
+                stack.append(currResult)
+                stack.append(sign)
+                currResult = 0
+                sign = 1
+            elif c == ')':
+                # Number ) or )
+                # pop the result from stack, pop the sign from stack (last two element in stack)
+                currResult += sign * currNumber
+                currNumber = 0
+                #print(currResult)
+                currResult *= stack.pop()
+                currResult += stack.pop()
+                
+            
+        #print("stack ", stack)
+        #print(currResult)
+        #print(sign)
+        #print(currNumber)
+        
+        
+        if currNumber != 0:
+            currResult += sign * currNumber
+            
+        return currResult
+        

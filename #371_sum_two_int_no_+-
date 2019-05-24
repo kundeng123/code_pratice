@@ -1,0 +1,27 @@
+# java solution
+class Solution {
+    public int getSum(int a, int b) {
+        if (a == 0 )
+            return b;
+        if (b== 0)
+            return a;
+        while (b != 0){
+            int carry = (a & b ) << 1;
+            a = a ^ b;
+            b = carry;
+        }
+        return a;
+    }
+}
+
+#python solution, need to take care of MAX_INT and MIN_INT case. 
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        #using bitwise operator
+        while b != 0:
+            c = ((a & b) << 1 ) % 0x100000000
+            a = (a ^ b) % 0x100000000
+            b = c
+        
+        #print(a)
+        return a if a <= 0x7FFFFFFF else a | (~0x100000000+1)

@@ -27,3 +27,36 @@ print(solution(nums))
 # for kth smallest, sort the list first:
 # nums.sort() will take O(n log n) 
 # return nums[k-1]
+
+//Java solution
+class Main {
+  public static void main(String[] args) {
+    //System.out.println("Hello world!");
+    //find the second smallest number in list
+    int[] number = {1,2,3,7,-4,-8,0};
+    //System.out.println(number);
+    if (number.length == 1)
+      System.out.println(number[0]);
+    else{
+      int smallest = Integer.MAX_VALUE;
+      int secondSmallest = Integer.MAX_VALUE;
+
+      for(int i = 0; i< number.length; i++){
+        if(number[i] < smallest){
+          secondSmallest = smallest;
+          smallest = number[i];
+        }
+        else if (number[i] > smallest && number[i] < secondSmallest){
+          secondSmallest = number[i];
+        }
+      }
+
+      if(secondSmallest == Integer.MAX_VALUE)
+        System.out.println("0");
+      else{
+        System.out.println(secondSmallest);
+      }
+
+    }
+  }
+}

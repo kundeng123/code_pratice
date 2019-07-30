@@ -2,3 +2,5 @@ while (input > 9 && input % 10 == 0)
   input /= 10;
 return input == 1;
 
+// add reference webpage:
+// https://codereview.stackexchange.com/questions/117203/checking-whether-a-number-is-a-power-of-10

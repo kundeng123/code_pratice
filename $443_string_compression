@@ -23,3 +23,34 @@ class Solution(object):
                     chars[write] = count_c
                     write = write + 1
         return write
+
+// java version
+T/S: O(n)/O(1)
+
+class Solution {
+    public int compress(char[] chars) {
+        int len = chars.length;
+	if (len < 2)
+		return len;
+	int i = 0; // slow pointer
+	int j = 0; // fast pointer
+	int head = 0; // writing head pointer
+
+	while (j <= len) {
+		while ((j < len) && (chars[i] == chars[j]))
+			j++;
+		chars[head++] = chars[i];
+		int count = j - i;
+		if (count > 1) {
+			String s = Integer.toString(count);
+			for (int k = 0; k < s.length(); k++)
+				chars[head++] = s.charAt(k);
+		}
+		i = j;
+		j++;
+	}
+        
+        System.out.println(chars);
+	return head;
+    }
+}

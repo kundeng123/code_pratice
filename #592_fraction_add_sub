@@ -49,6 +49,11 @@ class Solution:
     
 ----Java version
 class Solution {
+/*
+Time complexity : O(n \log x)O(nlogx). Euclidean GCD algorithm takes O(\log(ab))O(log(ab)) time for finding gcd of two numbers aa and bb. Here nn refers to the number of fractions in the input string and xx is the maximum possible value of denominator.
+
+Space complexity : O(n)O(n). Size of signsign list grows upto nn.
+*/
     public int gcd(int a, int b){
         if ( a== 0){
             return Math.abs(b);

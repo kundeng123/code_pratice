@@ -40,4 +40,49 @@ class Solution:
             i += 1
             nums[r] = i
         return s
+     
+     
+public class Solution {
+//time complexity O(n)
+/* test cases
+(1, 3)
+(1, 5)
+(1, 6)
+(1, 90)
+(1, 99)
+(22, 7)
+(-50, 8)
+(0, -5)
+(-1, -2147483648)
+(-2147483648, 1)
+*/
+    public String fractionToDecimal(int numerator, int denominator) {
+        if (numerator == 0) return "0";
+        if (denominator == 0) throw new ArithmeticException();
+        boolean sameSign = (numerator > 0) ^ (denominator < 0);
+        long dividend = Math.abs((long)numerator);
+        long divisor = Math.abs((long)denominator);
         
+        String intPart = String.valueOf(dividend / divisor);
+        intPart = sameSign ? intPart : "-" + intPart;
+        long remainder = dividend % divisor;
+        if (remainder == 0) return intPart;
+        
+        Map<Long, Integer> map = new HashMap<>();
+        StringBuilder decimalPart = new StringBuilder();     
+        
+        while (remainder != 0) {                   
+            map.put(remainder, decimalPart.length()); 
+            remainder *= 10;
+            decimalPart.append(remainder / divisor);
+            remainder = remainder % divisor;                        
+            if (map.containsKey(remainder)) {
+                decimalPart.insert(map.get(remainder), "(");
+                decimalPart.append(')');
+                break;
+            }
+        }
+        
+        return intPart + "." + decimalPart.toString();
+    }
+}

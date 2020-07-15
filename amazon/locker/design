@@ -1,0 +1,138 @@
+public enum Size{
+	SAMLL(0), MEDIUM(1), LARGE(2);
+	private int size;
+	private Size(int size){
+		this.size = size;
+	}
+	public int getSize(){
+		return this.size;
+	}
+}
+
+public class Package{
+	private long id;
+	private int zipcode;
+	private Size packageSize;
+	public Package(long id, int zipcode, Size size){
+		this.id = id;
+		this.zipcode = zipcode;
+		this.size = size;
+	}
+	public long getId(){
+		return id;
+	}
+	public int getZipcode(){
+		return zipcode;
+	}
+	public Size getSize(){
+		return size;
+	}
+}
+public class Locker{
+	private long id;
+	private int zipcode;
+	private Size size;
+	boolean isAvailable;
+	Package package;
+	public Locker(long id, int zipcode, Size size){
+		this.id = id;
+		this.zipcode = zipcode;
+		this.size = size;
+	}
+	//getter and setter
+	public boolean canFitPackage(Package package){
+		if(this.size.getSize() > = package.getSize().getSize()){
+			return true;
+		}
+		return false;
+	}
+	public void savePackage(Package package){
+		if(canFitPackage){
+			this.package = package;
+		}
+	}
+	public void removePackage(){
+		this.package = null;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

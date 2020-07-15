@@ -10,7 +10,8 @@ public class Zombies {
 	    int[] dc = new int[]{0,-1,0,1};
 	    int row = grid.length;
         int col = grid[0].length;
-        
+        // * 时间复杂度：O(M*N)
+        //* 空间复杂度：O(M*N)
         Queue<int[]> queue = new LinkedList<>();
         int human = 0;
 

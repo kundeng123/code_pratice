@@ -4,10 +4,49 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 public class SkyLineMin {
 
+	private class Interval{
+		public int start;
+		public int end;
+		public int price;
+		public Interval(int start, int end, int price) {
+			this.start = start;
+			this.end = end;
+			this.price = price;
+		}
+		public int getStart() {
+			return this.start;
+		}
+		public int getEnd() {
+			return this.end;
+		}
+		public int getPrice() {
+			return this.price;
+		}
+		
+	@Override
+	public boolean equals(Object a) {
+		System.out.println("here");
+		Interval ab = (Interval) a;
+		if(this == a) {
+			return true;
+		}
+		if(this.start == ab.getStart() && this.end == ab.getEnd() && this.price == ab.getPrice()) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public int hashCode() {
+
+	    return Objects.hash(this.start, this.end, this.price);
+	}
+		
+	}
 	public SkyLineMin() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,6 +68,18 @@ public class SkyLineMin {
 				};
 			List<List<Integer>> result = solution.getSkyline(input);
 			System.out.println(result);
+			SkyLineMin min = new SkyLineMin();
+			
+			Interval int1 = min.new Interval(1,2,3);
+			Interval int2 = min.new Interval(2,5,6);
+			
+			Interval int3 = min.new Interval(1,2,3);
+			Interval int4 = min.new Interval(2,5,6);
+
+			List<Interval> l1 = new ArrayList<>(Arrays.asList(int1, int2));
+			List<Interval> l2 = new ArrayList<>(Arrays.asList(int3,int4));
+			System.out.println(l1.equals(l2));
+			
 	}
 
 }
